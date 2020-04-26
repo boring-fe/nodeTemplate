@@ -3,7 +3,7 @@ import bodyParser from 'body-parser';
 import compression from 'compression';
 
 interface SetupConfig {
-  PORT: number;
+  PORT: string;
 }
 
 export const bootstrapApp = (setupConfig: SetupConfig): Express => {
@@ -15,10 +15,9 @@ export const bootstrapApp = (setupConfig: SetupConfig): Express => {
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({extended: true}));
   app.use(compression());
-  app.use('/static', express.static('public'));
 
   app.get('/health-check', (req: Request, res: Response) => {
-    console.log(req);
+    console.log('>>', req.baseUrl);
 
     res.status(200).send('Health');
   });

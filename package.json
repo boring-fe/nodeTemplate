@@ -4,14 +4,16 @@
   "description": "",
   "main": "dist/server.js",
   "scripts": {
+    "dev": "run-p watch serve",
     "sync": "fnm use",
     "test": "jest",
-    "build": "tsc",
-    "watch": "tsc --watch",
-    "serve": "node ./dist/server.js",
-    "eslint": "eslint --cache --ext .ts,.tsx src",
-    "eslint:dump": "eslint --print-config ./.eslintrc.json",
-    "prettier": "prettier --write src/**/*.js"
+    "build": "run-s clean lint ts:build",
+    "ts:watch": "tsc --watch",
+    "ts:build": "tsc",
+    "serve": "nodemon ./dist/server.js",
+    "lint": "eslint --cache --ext .ts,.tsx src",
+    "lint:dump": "eslint --print-config ./.eslintrc.json",
+    "clean": "rm -rf dist"
   },
   "keywords": [],
   "author": "",
@@ -24,7 +26,8 @@
     "body-parser": "^1.19.0",
     "compression": "^1.7.4",
     "eslint": "^6.8.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "npm-run-all": "^4.1.5"
   },
   "devDependencies": {
     "@types/express": "^4.17.6",
